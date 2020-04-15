@@ -898,9 +898,9 @@ class ListCommand(Command):
     USAGE = dedent(
         """
         Usage:
-            emborg [options] list
-            emborg [options] archives
-            emborg [options] lr
+            emborg [options] list [<archive>]
+            emborg [options] archives [<archive>]
+            emborg [options] lr [<archive>]
 
         Options:
             -e, --include-external   list all archives in repository, not just
@@ -919,7 +919,7 @@ class ListCommand(Command):
         # run borg
         borg = settings.run_borg(
             cmd="list",
-            args=["--short", settings.destination()],
+            args=["--short", settings.destination(cmdline["<archive>"])],
             emborg_opts=options,
             strip_prefix=include_external_archives,
         )
